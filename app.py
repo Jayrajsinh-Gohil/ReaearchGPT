@@ -29,9 +29,6 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 def home():
     return render_template('index.html')
 
-# if os.path.exists("embaddings/"):
-#     shutil.rmtree("embaddings/")
-
 if not os.path.exists('uploads'):
     os.makedirs('uploads')
 else:
@@ -142,15 +139,6 @@ def upload_pdf():
 
 
 
-                # doc=read_doc(dirpath)
-                # # print(len(doc))
-                # print("Doc reading done")
-
-                # document = chunc_data(docs=doc)
-                # # print(len(document))
-                # print("Doc chunking done")
-
-
                 # Create ChromaDB with unique directory (no persistence to avoid readonly issues)
                 db = Chroma.from_documents(
                     chunked_documents, 
@@ -172,12 +160,6 @@ def upload_pdf():
                 file_pre_pro_time = round(file_pre_pro_time_end - file_pre_pro_time_start, 2)
                 print(f"File preprocessing time: {file_pre_pro_time} seconds")
 
-                # author_prompt = ChatPromptTemplate.from_template("""You are an AI that extracts data from research paper text. From the given context, find all author names, keep them in the same order, and output them comma-separated. Don’t include affiliations, titles, or extra text — only the names.
-                #                                                         \n Context : {context}
-                #                                                         \n Input : {input}
-                #                                         """)
-                # Create prompt template
-
 
 
                 author_prompt = ChatPromptTemplate.from_template("""
@@ -196,14 +178,6 @@ def upload_pdf():
                 author_document_chain = create_stuff_documents_chain(llm,author_prompt)
                 print("Chain done")
 
-
-                # # Add this before creating the retrieval chain
-                # print("Retrieved Documents:")
-                # retrieved_docs = retriever.get_relevant_documents("From the given context, find all author names, keep them in the same order")
-                # for i, doc in enumerate(retrieved_docs):
-                #     print(f"\nDocument {i+1}:")
-                #     print("Content:", doc.page_content[:200], "...")  # Print first 200 chars
-                #     print("Metadata:", doc.metadata)
 
 
                 retrieval_chain=create_retrieval_chain(retriever,author_document_chain)
@@ -486,4 +460,5 @@ def upload_pdf():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
     
+
     
