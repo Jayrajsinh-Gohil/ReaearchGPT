@@ -305,13 +305,6 @@ This project is available for educational and research purposes.
 - **ChromaDB** - For efficient vector storage
 - **Meta AI** - For the Llama3 model
 
-## 📮 Support
-
-For issues and questions:
-1. Check the troubleshooting section above
-2. Review [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed setup
-3. Check [LOCAL_NETWORK_SETUP.md](LOCAL_NETWORK_SETUP.md) for network issues
-
 ## 🔄 Future Enhancements
 
 - [ ] Support for multiple PDF processing
